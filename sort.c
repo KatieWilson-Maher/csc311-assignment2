@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include <time.h>
+#include <stdlib.h>
 
 
 void merge(int[], int, int ,int);
@@ -27,7 +28,6 @@ void merge(int nums[], int low, int mid, int high){
 		left[index] = nums[low+index];
 	}
 	
-
 	int right_start = mid+1;
 	for(int index=0; index<right_len; index++){
 		right[index] = nums[right_start+index];
@@ -48,7 +48,7 @@ void merge(int nums[], int low, int mid, int high){
 			right_index++;
 		}
 		num_index++;
-	}//end of while
+	}
 	
 	while(left_index < left_len){
 		nums[num_index] = left[left_index];
@@ -64,49 +64,21 @@ void merge(int nums[], int low, int mid, int high){
 	
 }
 
-int main(){
+int main(int argc, char* argv[]){
 
+	if(argc < 2){
+		//fail
+	}
+	int size = atoi(argv[1]);
 	
-	int size = 100000;	
 	int nums[size];
 	
+    clock_t begin = clock();
+	mergeSort(nums, 0, size);
+	clock_t end = clock();
+	double timeTaken = (double)(end - begin) / CLOCKS_PER_SEC;
+   
+    printf("c mergeSort() took %f seconds to execute for %d elements\n", timeTaken, size);
 	
-	
-	clock_t time;
-    time = clock();
-    mergeSort(nums, 0, size);
-    time = clock() - time;
-    double timeTaken = ((double)time)/CLOCKS_PER_SEC; // in seconds
-    printf("mergeSort() took %f seconds to execute \n", timeTaken);
-    
-    
-    char *fileName = "time.txt";
-    
-    FILE *fp = fopen(fileName, "a");
-    if (fp == NULL)
-    {
-        printf("Error opening the file %s", fileName);
-        return -1;
-    }
-    fprintf(fp, "c program took %f seconds to run\n", timeTaken);
-
-    fclose(fp);
-    
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
