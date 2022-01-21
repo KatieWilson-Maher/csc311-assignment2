@@ -64,6 +64,20 @@ void merge(int nums[], int low, int mid, int high){
 	
 }
 
+int* makeArray(int length){
+        int* pointer = (int*)malloc(sizeof(int)*length);
+        int intArray[length];
+        pointer = intArray;
+        int i;
+
+        srand(time(NULL));
+
+        for(i=0;i<length;i++){
+                pointer[i]=(rand());
+        }
+        return pointer;
+}
+
 int main(int argc, char* argv[]){
 
 	if(argc < 2){
@@ -71,7 +85,11 @@ int main(int argc, char* argv[]){
 	}
 	int size = atoi(argv[1]);
 	
-	int nums[size];
+	//int nums[size];
+	int *nums = makeArray(size);
+	for(int i = 0; i < size; i++){
+		printf("%d\n", nums[i]);
+	}
 	
     clock_t begin = clock();
 	mergeSort(nums, 0, size);
