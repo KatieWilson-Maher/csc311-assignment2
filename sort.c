@@ -64,32 +64,21 @@ void merge(int nums[], int low, int mid, int high){
 	
 }
 
+
 int* makeArray(int length){
-        int* pointer = (int*)malloc(sizeof(int)*length);
-        int intArray[length];
-        pointer = intArray;
-        int i;
-
-        srand(time(NULL));
-
-        for(i=0;i<length;i++){
-                pointer[i]=(rand());
-        }
-        return pointer;
+	int* pointer = (int*)malloc(sizeof(int)*length);
+	for(int i=0;i<length;i++){
+    	pointer[i]=(rand()%length);
+    }
+    return pointer;
 }
+
 
 int main(int argc, char* argv[]){
 
-	if(argc < 2){
-		//fail
-	}
 	int size = atoi(argv[1]);
 	
-	//int nums[size];
-	int *nums = makeArray(size);
-	for(int i = 0; i < size; i++){
-		printf("%d\n", nums[i]);
-	}
+	int* nums = makeArray(size);
 	
     clock_t begin = clock();
 	mergeSort(nums, 0, size);
